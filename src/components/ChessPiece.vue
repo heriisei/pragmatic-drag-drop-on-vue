@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { draggable } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import type { PieceRecord } from "../types/chess";
 
@@ -7,7 +7,9 @@ const { piece } = defineProps<{
   piece: PieceRecord;
 }>();
 
-const imageSrc = new URL(`/src/assets/${piece.type}.png`, import.meta.url).href;
+const imageSrc = computed(
+  () => new URL(`/src/assets/${piece.type}.png`, import.meta.url).href,
+);
 
 const imageRef = ref();
 const dragging = ref(false);
